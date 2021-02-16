@@ -2,9 +2,9 @@
 //we will import it 
 // const moment = require("moment");
 //Setting a current date for the webpage. I grabbed my HTML with $
-let currentDate = $(".Date").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+// let currentDate = $(".Date").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
 //Document.ready makes sure that our HTML runs on JavaScript
-$(document).ready(function()  {
+// $(document).ready(function()  {
 
 
 
@@ -30,7 +30,7 @@ searchbtn.on("click" , function(event) {
 });
 
 
-//declares argument
+//declares argument to get the current weather.
 function getCurrentWeather(city){
         console.log(city)
     //ajax call
@@ -65,14 +65,24 @@ function getCurrentWeather(city){
     //      - to get forecast
     //      - to get uv index
 
-
-
-
-
-
-
         })
 };
+
+//5 Day forecast API Ajax Call
+
+function GetfiveDayForecast(search){
+    $.ajax({
+        type: "GET",
+        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKEY + "&units=imperial",
+    }).then(function(data) {
+    })  
+}
+
+const foreCast = data.list
+
+
+
+
 
 
 
@@ -92,10 +102,4 @@ function getCurrentWeather(city){
 //      pass that var as an argument to a funciton;
 
 
-
-
-
-
-
-} );
 
