@@ -26,6 +26,7 @@ searchbtn.on("click" , function(event) {
             //call function to make ajax call
             //pass argument searchCity
             getCurrentWeather(searchCity);
+            GetfiveDayForecast(searchCity);
         }
 });
 
@@ -70,15 +71,20 @@ function getCurrentWeather(city){
 
 //5 Day forecast API Ajax Call
 
-function GetfiveDayForecast(search){
+function GetfiveDayForecast(city){
     $.ajax({
         type: "GET",
         url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKEY + "&units=imperial",
-    }).then(function(data) {
+    }).then(function(data) { 
+        console.log(data);
     })  
 }
 
-const foreCast = data.list
+
+ 
+
+
+
 
 
 
