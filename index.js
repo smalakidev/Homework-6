@@ -55,9 +55,15 @@ function getCurrentWeather(city){
             var humidity = $("<h3>").text("Humidity " +res.main.humidity + "%");
             //temperature
             var temperature = $("<h3>").text("temperature " + res.main.temp + "F");
+            var img = $("<h3>").attr({
+                src:
+                  "https://openweathermap.org/img/w/" + res.weather[0].icon + ".png",
+                height: "100px",
+                width: "100px",
+              });
             //img
 
-            card.append(cityName, wind, humidity , temperature)
+            card.append(cityName, wind, humidity , temperature, img)
             $(".currentWeather").append(card)
         
 
@@ -74,9 +80,24 @@ function getCurrentWeather(city){
 function GetfiveDayForecast(city){
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKEY + "&units=imperial",
+        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKEY + "&units=imperial",
     }).then(function(data) { 
-        console.log(data);
+      //  console.log(data);
+
+        for (let i = 0; i < data.list.length; i++) {
+           // console.log(data.list[i]
+            if(data.list[i].dt_txt.indexOf("15:00:00") !== -1){
+                    console.log(data.list[i])
+                var card = $("<div>").addClass("col card");
+                var date = $("<h4>").text(new Date (data.list[i].dt_txt).toLocaleDateString());
+                var temp =$("<p>").text("Temperature: " + data.list[i].main.temp_max);
+                var humid = $("<p>").text("Humidity: " + data.list[i].main.humidity);
+console.log(new Date (data.list[i].dt_txt))
+                card.append(date, temp, humid)
+                $("#fiveDay").append(card)
+            }
+            
+        }
     })  
 }
 
