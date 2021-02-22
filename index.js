@@ -46,7 +46,7 @@ function getCurrentWeather(city){
     //ajax call
     $.ajax({
         type: "GET",
-        url:"http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKEY + "&units=imperial"
+        url:"https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKEY + "&units=imperial"
     })
         .then((res)=>{
             console.log(res)
