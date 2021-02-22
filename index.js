@@ -97,7 +97,7 @@ function getCurrentWeather(city){
 function GetfiveDayForecast(city){
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKEY + "&units=imperial",
+        url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKEY + "&units=imperial",
     }).then(function(data) { 
       //  console.log(data);
 
