@@ -12,6 +12,15 @@ var APIKEY ="7340c61d1124828c3bc01eb7d3fb07cb"
 //jquery is used to grab the search button 
 let searchbtn = $("#search-btn");
 
+ //store city in local storage if not there already
+//This function saves the city to local storage.
+
+// function saveCurrentCity() {
+
+//     localStorage.setItem("SaveCurrentCity", JSON.stringify(searchCity) { }
+// }
+
+
 //.ON replaces addEvent Listener in this case and brings
 //the click functionality for the search button
 searchbtn.on("click" , function(event) {
@@ -41,7 +50,12 @@ function getCurrentWeather(city){
     })
         .then((res)=>{
             console.log(res)
-    //store city in local storage if not there already
+    
+
+
+   
+   
+
     //clear previous content
 
     //create html for current weather
@@ -75,6 +89,9 @@ function getCurrentWeather(city){
         })
 };
 
+
+
+
 //5 Day forecast API Ajax Call
 
 function GetfiveDayForecast(city){
@@ -92,6 +109,7 @@ function GetfiveDayForecast(city){
                 var date = $("<h4>").text(new Date (data.list[i].dt_txt).toLocaleDateString());
                 var temp =$("<p>").text("Temperature: " + data.list[i].main.temp_max);
                 var humid = $("<p>").text("Humidity: " + data.list[i].main.humidity);
+                var uv
 console.log(new Date (data.list[i].dt_txt))
                 card.append(date, temp, humid)
                 $("#fiveDay").append(card)
