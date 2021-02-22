@@ -133,7 +133,7 @@ console.log(new Date (data.list[i].dt_txt))
 
 // function.localStorage()
 
-//Get from local storage.
+//Get from local storage
 //submit to local storage
 //Get Weather API
 //Current date and time with Moment.js
@@ -145,6 +145,8 @@ console.log(new Date (data.list[i].dt_txt))
 // on click event, which trigers a function
 //      grab value from input, store it into a var
 //      pass that var as an argument to a funciton;
+
+
 
 
 
