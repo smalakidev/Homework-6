@@ -43,10 +43,17 @@ searchbtn.on("click" , function(event) {
         }
 });
 
+//Variable created here for the clear button and jquery was used
+let clear = $("#clear");
+//$(this).val("");
 //Clear button clears the information from the search
 clear.on("click" , function(event) {
     event.preventDefault();
-}
+    $('#search-input').val("");
+    $(this).val("");
+   
+});
+
 
 //declares argument to get the current weather.
 function getCurrentWeather(city){

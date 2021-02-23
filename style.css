@@ -1,3 +1,11 @@
-h1  { color: darkblue;
+body .dashboard  { color: darkblue;
+    text-align: center;
+    position: relative;
+}
 
+body{
+    padding-left: 10%;
+}
+.dashboard{
+    position:fixed;
 }
