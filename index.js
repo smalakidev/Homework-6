@@ -43,6 +43,10 @@ searchbtn.on("click" , function(event) {
         }
 });
 
+//Clear button clears the information from the search
+clear.on("click" , function(event) {
+    event.preventDefault();
+}
 
 //declares argument to get the current weather.
 function getCurrentWeather(city){
@@ -61,7 +65,14 @@ function getCurrentWeather(city){
    
 
     //clear previous content
-    $(".currentWeather").empty()
+        
+        
+        $(".currentWeather").clear();
+
+    
+    
+    
+   
 
     //create html for current weather
            //car. Here we are  literally creating HTML Content with JavaScript
@@ -97,7 +108,7 @@ function getCurrentWeather(city){
 
 
 
-//5 Day forecast API Ajax Call
+//5 Day forecast API Ajax Call. 
 
 function GetfiveDayForecast(city){
     $.ajax({
@@ -130,7 +141,7 @@ console.log(new Date (data.list[i].dt_txt))
 var cityArr = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
-//if cityArr length is more then 0, call the fucntion to diplays past searches
+//Here if cityArr length is more than 0, then we call the fucntion to display the City searches
 if(cityArr.length > 0){
     console.log("ARRAY", cityArr)
 for (let i = 0; i < cityArr.length; i++) {
@@ -140,6 +151,8 @@ for (let i = 0; i < cityArr.length; i++) {
 }
 
 }
+
+
 
 
 
