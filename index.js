@@ -15,10 +15,7 @@ let searchbtn = $("#search-btn");
  //store city in local storage if not there already
 //This function saves the city to local storage.
 
-// function saveCurrentCity() {
 
-//     localStorage.setItem("SaveCurrentCity", JSON.stringify(searchCity) { }
-// }
 
 
 //.ON replaces addEvent Listener in this case and brings
@@ -31,9 +28,16 @@ searchbtn.on("click" , function(event) {
             alert("Please enter a town or City in the search bar")
         }else{
 
-        console.log(searchCity)
+        console.log(cityArr)
             //call function to make ajax call
             //pass argument searchCity
+
+            //check to make sure we dont save the same city twice
+           if( cityArr.indexOf(searchCity) === -1){
+               cityArr.push(searchCity);
+               localStorage.setItem("cityHistory", JSON.stringify(cityArr))
+           }
+    $("#search-input").val(" ")
             getCurrentWeather(searchCity);
             GetfiveDayForecast(searchCity);
         }
@@ -57,6 +61,7 @@ function getCurrentWeather(city){
    
 
     //clear previous content
+    $(".currentWeather").empty()
 
     //create html for current weather
            //car. Here we are  literally creating HTML Content with JavaScript
@@ -100,7 +105,7 @@ function GetfiveDayForecast(city){
         url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKEY + "&units=imperial",
     }).then(function(data) { 
       //  console.log(data);
-
+        $("#fiveDay").empty();
         for (let i = 0; i < data.list.length; i++) {
            // console.log(data.list[i]
             if(data.list[i].dt_txt.indexOf("15:00:00") !== -1){
@@ -122,8 +127,19 @@ console.log(new Date (data.list[i].dt_txt))
 
  
 
+var cityArr = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
+//if cityArr length is more then 0, call the fucntion to diplays past searches
+if(cityArr.length > 0){
+    console.log("ARRAY", cityArr)
+for (let i = 0; i < cityArr.length; i++) {
+    console.log(cityArr[i])
+    var item = $("<li>").text(cityArr[i])
+    $("#cityList").append(item)
+}
+
+}
 
 
 
