@@ -77,6 +77,8 @@ function getCurrentWeather(city){
         var lat = res.coord.lat;
         var lon = res.coord.lon;
 
+        getUVIndex(lat, lon)
+
 
    
    
@@ -180,7 +182,12 @@ for (let i = 0; i < cityArr.length; i++) {
 }
 
 //Function for getting the UV Index
-function getUVIndex("")
+function getUVIndex(lat,lon) {
+    console.log(lat,lon);
+    $.ajax({
+        type: "GET",
+        url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "lon="+lon+"&appid="  + APIKEY 
+    }).then(res=>console.log(res));
 
 
 
