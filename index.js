@@ -181,15 +181,20 @@ for (let i = 0; i < cityArr.length; i++) {
 
 }
 
-//Function for getting the UV Index
+//Function for getting the UV Index and the AJAX Call to do so
 function getUVIndex(lat,lon) {
     console.log(lat,lon);
     $.ajax({
         type: "GET",
-        url: "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "lon="+lon+"&appid="  + APIKEY 
-    }).then(res=>console.log(res));
+        url: "http://api.openweathermap.org/data/2.5/uvi?appid="+APIKEY+"&lat=" + lat + "&lon=" + lon, 
+        dataType:"JSON"
+    }).then(res=>{
+        console.log(res)
+        var uvIndex = $("<p>").text("UN Index" + res.value);
+    });
+    
 
-
+}
 
 
 
