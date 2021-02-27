@@ -61,6 +61,8 @@ clear.on("click" , function(event) {
 
 //declares argument to get the current weather.
 function getCurrentWeather(city){
+
+    
         console.log(city)
     //ajax call
     $.ajax({
@@ -69,7 +71,11 @@ function getCurrentWeather(city){
     })
         .then((res)=>{
             console.log(res)
-    
+            console.log(res.coord);
+            //Lat & lon variables created here for passing into the UV Index Function 
+        //which is down below.
+        var lat = res.coord.lat;
+        var lon = res.coord.lon;
 
 
    
@@ -126,7 +132,8 @@ function GetfiveDayForecast(city){
         type: "GET",
         url: "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKEY + "&units=imperial",
     }).then(function(data) { 
-      //  console.log(data);
+        
+       console.log(data.city.coord);
         $("#fiveDay").empty();
         for (let i = 0; i < data.list.length; i++) {
            // console.log(data.list[i]
@@ -136,7 +143,7 @@ function GetfiveDayForecast(city){
                 var date = $("<h4>").text(new Date (data.list[i].dt_txt).toLocaleDateString());
                 var temp =$("<p>").text("Temperature: " + data.list[i].main.temp_max);
                 var humid = $("<p>").text("Humidity: " + data.list[i].main.humidity);
-                var uvIndex = $("<p>").text("UV Index: " + data.list[i].main.uvIndex)
+                
 console.log(new Date (data.list[i].dt_txt))
                 card.append(date, temp, humid)
                 $("#fiveDay").append(card)
@@ -172,7 +179,8 @@ for (let i = 0; i < cityArr.length; i++) {
 
 }
 
-
+//Function for getting the UV Index
+function getUVIndex("")
 
 
 
