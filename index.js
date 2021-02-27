@@ -33,11 +33,15 @@ searchbtn.on("click" , function(event) {
             //pass argument searchCity
 
             //check to make sure we dont save the same city twice
-           if( cityArr.indexOf(searchCity) === -1){
+            console.log(cityArr.indexOf(searchCity))
+            console.log(cityArr)
+           if(cityArr.indexOf(searchCity) === -1){
                cityArr.push(searchCity);
                localStorage.setItem("cityHistory", JSON.stringify(cityArr))
+               makeList(searchCity)
            }
-    $("#search-input").val(" ")
+    $("#search-input").val("")
+           
             getCurrentWeather(searchCity);
             GetfiveDayForecast(searchCity);
         }
@@ -49,8 +53,8 @@ let clear = $("#clear");
 //Clear button clears the information from the search
 clear.on("click" , function(event) {
     event.preventDefault();
-    $('#search-input').val("");
-    $(this).val("");
+  localStorage.clear();
+  $("#cityList").empty();
    
 });
 
@@ -74,7 +78,7 @@ function getCurrentWeather(city){
     //clear previous content
         
         
-        $(".currentWeather").clear();
+        $(".currentWeather").empty();
 
     
     
@@ -99,7 +103,7 @@ function getCurrentWeather(city){
                 width: "100px",
               });
             //img
-
+console.log(card)
             card.append(cityName, wind, humidity , temperature, img)
             $(".currentWeather").append(card)
         
@@ -132,7 +136,7 @@ function GetfiveDayForecast(city){
                 var date = $("<h4>").text(new Date (data.list[i].dt_txt).toLocaleDateString());
                 var temp =$("<p>").text("Temperature: " + data.list[i].main.temp_max);
                 var humid = $("<p>").text("Humidity: " + data.list[i].main.humidity);
-                var uv
+                var uvIndex = $("<p>").text("UV Index: " + data.list[i].main.uvIndex)
 console.log(new Date (data.list[i].dt_txt))
                 card.append(date, temp, humid)
                 $("#fiveDay").append(card)
@@ -141,7 +145,16 @@ console.log(new Date (data.list[i].dt_txt))
         }
     })  
 }
-
+//This makes the city list clickable
+function makeList(city){
+    var item = $("<li>").text(city)
+    item.click(function(){
+        //console.log($(this).text())
+        getCurrentWeather($(this).text())
+        GetfiveDayForecast($(this).text())
+    })
+    $("#cityList").append(item)
+}
 
  
 
@@ -149,15 +162,18 @@ var cityArr = JSON.parse(localStorage.getItem("cityHistory")) || [];
 
 
 //Here if cityArr length is more than 0, then we call the fucntion to display the City searches
+
 if(cityArr.length > 0){
     console.log("ARRAY", cityArr)
 for (let i = 0; i < cityArr.length; i++) {
     console.log(cityArr[i])
-    var item = $("<li>").text(cityArr[i])
-    $("#cityList").append(item)
+    makeList(cityArr[i])
 }
 
 }
+
+
+
 
 
 
