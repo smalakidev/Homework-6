@@ -190,7 +190,9 @@ function getUVIndex(lat,lon) {
         dataType:"JSON"
     }).then(res=>{
         console.log(res)
-        var uvIndex = $("<p>").text("UN Index" + res.value);
+        var uvIndex = $("<p>").text("UV Index" + res.value);
+        // $("#cityList").append(uvIndex)
+        $(".currentWeather").append(uvIndex)
     });
     
 
