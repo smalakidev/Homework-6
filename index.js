@@ -103,7 +103,7 @@ function getCurrentWeather(city){
             //huminidty
             var humidity = $("<h3>").text("Humidity " +res.main.humidity + "%");
             //temperature
-            var temperature = $("<h3>").text("temperature " + res.main.temp + "F");
+            var temperature = $("<h3>").text("Temperature " + res.main.temp + "F");
             var img = $("<h3>").attr({
                 src:
                   "https://openweathermap.org/img/w/" + res.weather[0].icon + ".png",
@@ -117,10 +117,7 @@ console.log(card)
         
 
 
-    //call next ajaxs
-    //      - to get forecast
-    //      - to get uv index
-
+   
         })
 };
 
@@ -190,8 +187,8 @@ function getUVIndex(lat,lon) {
         dataType:"JSON"
     }).then(res=>{
         console.log(res)
-        var uvIndex = $("<p>").text("UV Index" + res.value);
-        // $("#cityList").append(uvIndex)
+        var uvIndex = $("<h3>").text("UV Index" + res.value);
+        // Here i have appended the current weather to the JS
         $(".currentWeather").append(uvIndex)
     });
     
